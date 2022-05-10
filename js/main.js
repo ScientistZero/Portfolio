@@ -19,13 +19,13 @@
  * Preloader
  */
 
-(function($) {
+(function ($) {
   'use strict';
-  $(function() {
+  $(function () {
     /*----------- Globals -----------*/
 
     // Scrolling animation if the user clicks on a Hash link that has 'data-scroll' attribute
-    $(document).on('click', 'a[data-scroll][href^="#"]', function(e) {
+    $(document).on('click', 'a[data-scroll][href^="#"]', function (e) {
       var id = $(this).attr('href');
       var $id = $(id);
       if ($id.length === 0) {
@@ -45,7 +45,7 @@
 
     $('.sidebar .list-menu').clone().children().appendTo('.mobile-navbar .navbar-nav').find('.nav-link').removeClass('active');
 
-    $(document).on('mouseup', function(event) {
+    $(document).on('mouseup', function (event) {
       if ($('.mobile-navbar #mobileNavbarSupportedContent').hasClass('show')) {
         // The mobile Bootstrap navbar dropdown
         var navbarToggler = $('.mobile-navbar .navbar-toggler');
@@ -58,7 +58,7 @@
     /*----------- Home -----------*/
 
     /* Animated heading text */
-    (function() {
+    (function () {
       // Set animation timing
       var animationDelay = 2500,
         // Clip effect
@@ -74,7 +74,7 @@
 
       function animateHeadline($headlines) {
         var duration = animationDelay;
-        $headlines.each(function() {
+        $headlines.each(function () {
           var headline = $(this);
           if (headline.hasClass('clip')) {
             var spanWrapper = headline.find('.cd-words-wrapper'),
@@ -83,7 +83,7 @@
           }
 
           //trigger animation
-          setTimeout(function() {
+          setTimeout(function () {
             hideWord(headline.find('.is-visible').eq(0));
           }, duration);
         });
@@ -95,7 +95,7 @@
         if ($word.parents('.cd-headline').hasClass('clip')) {
           $word.parents('.cd-words-wrapper').animate({
             width: '2px'
-          }, revealDuration, function() {
+          }, revealDuration, function () {
             switchWord($word, nextWord);
             showWord(nextWord);
           });
@@ -107,8 +107,8 @@
         if ($word.parents('.cd-headline').hasClass('clip')) {
           $word.parents('.cd-words-wrapper').animate({
             'width': $word.width() + 10
-          }, revealDuration, function() {
-            setTimeout(function() {
+          }, revealDuration, function () {
+            setTimeout(function () {
               hideWord($word);
             }, revealAnimationDelay);
           });
@@ -617,51 +617,51 @@
 
     /*----------- Contact -----------*/
 
-    $('.contact-form').on('submit', function(event) {
-      var form = $(this);
-      var submitBtn = form.find('#contact-submit');
-      var submitBtnText = submitBtn.text();
-      var feedbackEl = form.find('.contact-feedback');
-      event.preventDefault();
-      // Waiting for the response from the server
-      submitBtn.html('Wait...').addClass('wait').prop('disabled', true);
-      setTimeout(function() {
-        // Posts the Form's data to the server using Ajax
-        $.ajax({
-            url: form.attr('action'),
-            type: 'POST',
-            data: form.serialize(),
-          })
-          // Getting a response from the server
-          .done(function(response) {
-            // If the PHP file succeed sending the message
-            if (response == 'success') {
-              // Feedback to the user
-              submitBtn.removeClass('wait').html('Success').addClass('success');
-              feedbackEl.addClass('success').html('Thank you for your message. It has been sent.').fadeIn(200);
-              setTimeout(function() {
-                submitBtn.html(submitBtnText).removeClass('success').prop('disabled', false);
-                feedbackEl.fadeOut(200).removeClass('success').html('');
-              }, 6000);
-              // Clears the Form
-              form[0].reset();
-              // If something is wrong
-            } else {
-              // Feedback to the user
-              console.log(response);
-              submitBtn.removeClass('wait').html('Error').addClass('error');
-              feedbackEl.addClass('error').html('Server error! Please check your browser console log for more details.').fadeIn(200);
-              setTimeout(function() {
-                submitBtn.html(submitBtnText).removeClass('error').prop('disabled', false);
-                feedbackEl.fadeOut(200).removeClass('error').html('');
-              }, 6000);
-            }
-          });
-      }, 1000);
-    });
+    //$('.contact-form').on('submit', function(event) {
+    //var form = $(this);
+    // var submitBtn = form.find('#contact-submit');
+    // var submitBtnText = submitBtn.text();
+    // var feedbackEl = form.find('.contact-feedback');
+    // event.preventDefault();
+    // Waiting for the response from the server
+    // submitBtn.html('Wait...').addClass('wait').prop('disabled', true);
+    // setTimeout(function() {
+    // Posts the Form's data to the server using Ajax
+    // $.ajax({
+    //    url: form.attr('action'),
+    //    type: 'POST',
+    //    data: form.serialize(),
+    //  })
+    // Getting a response from the server
+    // .done(function(response) {
+    // If the PHP file succeed sending the message
+    //   if (response == 'success') {
+    // Feedback to the user
+    //     submitBtn.removeClass('wait').html('Success').addClass('success');
+    //     feedbackEl.addClass('success').html('Thank you for your message. It has been sent.').fadeIn(200);
+    //     setTimeout(function() {
+    //       submitBtn.html(submitBtnText).removeClass('success').prop('disabled', false);
+    //     feedbackEl.fadeOut(200).removeClass('success').html('');
+    //     }, 6000);
+    // Clears the Form
+    //     form[0].reset();
+    // If something is wrong
+    //    } else {
+    // Feedback to the user
+    //     console.log(response);
+    //     submitBtn.removeClass('wait').html('Error').addClass('error');
+    //     feedbackEl.addClass('error').html('Server error! Please check your browser console log for more details.').fadeIn(200);
+    //     setTimeout(function() {
+    //       submitBtn.html(submitBtnText).removeClass('error').prop('disabled', false);
+    //        feedbackEl.fadeOut(200).removeClass('error').html('');
+    //      }, 6000);
+    //         }
+    //       });
+    //   }, 1000);
+    // });
 
   });
-  $(window).on('load', function() {
+  $(window).on('load', function () {
     /*----------- Preloader -----------*/
 
     $('.preloader-icon').fadeOut(400);
@@ -669,14 +669,14 @@
 
     /*----------- Portfolio -----------*/
 
-    (function() {
+    (function () {
       var grid = $('.portfolio-area .portfolio-grid');
       var filters = $('.portfolio-area .filter-control li');
 
       grid.isotope({
         itemSelector: '.single-item',
       });
-      filters.on('click', function() {
+      filters.on('click', function () {
         filters.removeClass('tab-active');
         $(this).addClass('tab-active');
         var selector = $(this).data('filter');
@@ -687,14 +687,14 @@
       });
     }())
 
-    $('.portfolio-area .portfolio-grid .portfolio-item').each(function() {
+    $('.portfolio-area .portfolio-grid .portfolio-item').each(function () {
       var element = $(this);
       var target = element.attr('href');
       $(element).animatedModal({
         animatedIn: 'fadeIn',
         animatedOut: 'fadeOut',
         animationDuration: '.15s',
-        beforeOpen: function() {
+        beforeOpen: function () {
           $(target + '.lightbox-wrapper .lightbox-gallery').owlCarousel({
             loop: true,
             margin: 10,
@@ -703,7 +703,7 @@
             smartSpeed: 400
           });
         },
-        afterClose: function() {
+        afterClose: function () {
           $(target + '.lightbox-wrapper .lightbox-gallery').trigger('destroy.owl.carousel');
         }
       });
